@@ -58,8 +58,16 @@ class Router extends React.Component{
     this.props.customAction(opts);
   }
 
-  renderScene(route, navigator) {
+  toBack() {
+    if (this.state.route.index > 0) {
+      this.navigator.pop();
+      return true;
+    }
+    return false;
+  }
 
+  renderScene(route, navigator) {
+    this.navigator = navigator;
     var goForward = function(route) {
       route.index = this.state.route.index + 1 || 1;
       navigator.push(route);
