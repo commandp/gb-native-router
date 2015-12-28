@@ -126,7 +126,7 @@ class Router extends React.Component{
     if(route.trans) {
       margin = 0;
     } else if (this.props.hideNavigationBar || route.hideNavigationBar) {
-      margin = this.props.noStatusBar ? 0 : 20;
+      margin = (this.props.noStatusBar || route.noStatusBar) ? 0 : 20;
     } else {
       margin = 64;
     }
