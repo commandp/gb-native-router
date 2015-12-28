@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var EventEmitter = require('events').EventEmitter;
+var {EventEmitter} = require('fbemitter');
 
 var NavBarContainer = require('./components/NavBarContainer');
 
@@ -25,13 +25,12 @@ class Router extends React.Component{
     this.emitter = new EventEmitter();
   }
 
-  /*
-   * This changes the title in the navigation bar
-   * It should preferrably be called for "onWillFocus" instad >
-   * > but a recent update to React Native seems to break the animation
-   */
-  onDidFocus(route) {
+  onWillFocus(route) {
     this.setState({ route: route });
+    this.emitter.emit('willFocus', route.name);
+  }
+
+  onDidFocus(route) {
     this.emitter.emit('didFocus', route.name);
   }
 
@@ -54,6 +53,10 @@ class Router extends React.Component{
     this.setState({ leftProps: props });
   }
 
+  setTitleProps(props) {
+    this.setState({ titleProps: props });
+  }
+
   customAction(opts) {
     this.props.customAction(opts);
   }
@@ -64,6 +67,10 @@ class Router extends React.Component{
       return true;
     }
     return false;
+  }
+
+  configureScene(route) {
+    return route.sceneConfig || Navigator.SceneConfigs.FloatFromRight;
   }
 
   renderScene(route, navigator) {
@@ -97,6 +104,10 @@ class Router extends React.Component{
 
     var setLeftProps = function(props) {
       this.setState({ leftProps: props });
+    }.bind(this);
+
+    var setTitleProps = function(props) {
+      this.setState({ titleProps: props });
     }.bind(this);
 
     var customAction = function(opts) {
@@ -135,6 +146,7 @@ class Router extends React.Component{
           reset={goToFirstRoute}
           setRightProps={setRightProps}
           setLeftProps={setLeftProps}
+          setTitleProps={setTitleProps}
           customAction={customAction}
           {...route.passProps}
         />
@@ -147,7 +159,7 @@ class Router extends React.Component{
     var navigationBar;
     // Status bar color
     if (Platform.OS === 'ios') {
-      if (this.props.statusBarColor === "black") {
+      if (this.props.statusBarColor === 'black') {
         StatusBarIOS.setStyle(0);
       } else {
         StatusBarIOS.setStyle(1);
@@ -171,6 +183,7 @@ class Router extends React.Component{
         toBack={this.onBack.bind(this)}
         leftProps={this.state.leftProps}
         rightProps={this.state.rightProps}
+        titleProps={this.state.titleProps}
         customAction={this.customAction.bind(this)}
       />
     }
@@ -180,10 +193,13 @@ class Router extends React.Component{
         configureScene={route => {
           return route.sceneConfig ||  Navigator.SceneConfigs.FloatFromRight;
         }}
+        ref='navigator'
         initialRoute={this.props.firstRoute}
         navigationBar={navigationBar}
         renderScene={this.renderScene.bind(this)}
         onDidFocus={this.onDidFocus.bind(this)}
+        onWillFocus={this.onWillFocus.bind(this)}
+        configureScene={this.configureScene}
       />
     );
   }
