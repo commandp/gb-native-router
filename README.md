@@ -101,6 +101,7 @@ The **`this.props.toRoute()`** callback prop takes one parameter (a JavaScript o
 - `passProps`: Takes in an object. Passes each `key: value` pair to your component as a prop. i.e. <Component key={value} />
 - `trans`: If set to a truthy value it will make the navbar transparent and move your component content so that it sits behind the nav.
 - `hideNavigationBar`: If set to a truthy value will hide the navigationbar out of view, and move the component so that it is at the top of the screen.
+- `hideStatusBar`: Hide status bar, iOS only
 - `leftCornerProps`: If you set a `leftCorner` component you can use this property to pass props to that component.
 - `rightCornerProps`: If you set a `rightCorner` component you can use this property to pass props to that component.
 - `sceneConfig`: Control the animation of the route being switched. Possible values are:

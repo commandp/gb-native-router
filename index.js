@@ -131,6 +131,11 @@ class Router extends React.Component{
       margin = 64;
     }
 
+    if(route.hideStatusBar && Platform.OS === 'ios') {
+      StatusBarIOS.setHidden(true, 'none');
+      margin = 0;
+    }
+
     return (
       <View
         style={[styles.container, this.props.bgStyle, extraStyling, {marginTop: margin}]}>
