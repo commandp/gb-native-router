@@ -200,9 +200,6 @@ class Router extends React.Component{
 
     return (
       <Navigator
-        configureScene={route => {
-          return route.sceneConfig ||  Navigator.SceneConfigs.FloatFromRight;
-        }}
         ref='navigator'
         initialRoute={this.props.firstRoute}
         navigationBar={navigationBar}
