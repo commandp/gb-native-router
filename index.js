@@ -131,11 +131,14 @@ class Router extends React.Component{
       margin = 64;
     }
 
-    if(route.hideStatusBar && Platform.OS === 'ios') {
-      StatusBarIOS.setHidden(true, 'none');
-      margin = 0;
+    if(Platform.OS === 'ios') {
+      if(this.props.noStatusBar || route.noStatusBar) {
+        StatusBarIOS.setHidden(true, 'none');
+      } else {
+        StatusBarIOS.setHidden(false, 'none');
+      }
     } else {
-      StatusBarIOS.setHidden(false, 'none');
+      // Android not support
     }
 
     return (
