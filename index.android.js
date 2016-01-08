@@ -1,11 +1,9 @@
-'use strict';
+import React from 'react-native'
+import { EventEmitter } from 'fbemitter'
 
-var React = require('react-native')
-var {EventEmitter} = require('fbemitter')
+import NavBarContainer from './components/NavBarContainer'
 
-var NavBarContainer = require('./components/NavBarContainer')
-
-var {
+let {
   StyleSheet,
   Navigator,
   StatusBarIOS,
@@ -75,54 +73,54 @@ class Router extends React.Component {
 
   renderScene (route, navigator) {
     this.navigator = navigator
-    var goForward = function (route) {
+    let goForward = function (route) {
       route.index = this.state.route.index + 1 || 1
       navigator.push(route)
     }.bind(this)
 
-    var replaceRoute = function (route) {
+    let replaceRoute = function (route) {
       route.index = this.state.route.index || 0
       navigator.replace(route)
     }.bind(this)
 
-    var resetToRoute = function (route) {
+    let resetToRoute = function (route) {
       route.index = 0
       navigator.resetTo(route)
     }.bind(this)
 
-    var goBackwards = function () {
+    let goBackwards = function () {
       this.onBack(navigator)
     }.bind(this)
 
-    var goToFirstRoute = function () {
+    let goToFirstRoute = function () {
       navigator.popToTop()
     }
 
-    var setRightProps = function (props) {
+    let setRightProps = function (props) {
       this.setState({ rightProps: props })
     }.bind(this)
 
-    var setLeftProps = function (props) {
+    let setLeftProps = function (props) {
       this.setState({ leftProps: props })
     }.bind(this)
 
-    var setTitleProps = function (props) {
+    let setTitleProps = function (props) {
       this.setState({ titleProps: props })
     }.bind(this)
 
-    var customAction = function (opts) {
+    let customAction = function (opts) {
       this.customAction(opts)
     }.bind(this)
 
-    var Content = route.component
+    let Content = route.component
 
     // Remove the margin of the navigation bar if not using navigation bar
-    var extraStyling = {}
+    let extraStyling = {}
     if (this.props.hideNavigationBar) {
       extraStyling.marginTop = 0
     }
 
-    var margin
+    let margin
     if (route.trans) {
       margin = 0
     } else if (this.props.hideNavigationBar || route.hideNavigationBar) {
@@ -164,7 +162,7 @@ class Router extends React.Component {
   }
 
   render () {
-    var navigationBar
+    let navigationBar
     // Status bar color
     if (Platform.OS === 'ios') {
       if (this.props.statusBarColor === 'black') {
@@ -211,11 +209,11 @@ class Router extends React.Component {
   }
 }
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF'
   }
 })
 
-module.exports = Router
+export default Router
