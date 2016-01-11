@@ -209,6 +209,28 @@ class Router extends React.Component {
   }
 }
 
+Router.propTypes = {
+  firstRoute: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    component: React.PropTypes.element
+  }).isRequired,
+
+  rightCorner: React.PropTypes.element,
+  backButtonComponent: React.PropTypes.element,
+
+  customAction: React.PropTypes.func,
+
+  hideNavigationBar: React.PropTypes.bool,
+  noStatusBar: React.PropTypes.bool,
+
+  headerStyle: View.propTypes.style,
+  titleStyle: View.propTypes.style,
+  bgStyle: View.propTypes.style,
+  borderColor: React.PropTypes.string,
+  statusBarColor: React.PropTypes.string,
+  borderBottomWidth: React.PropTypes.number
+}
+
 let styles = StyleSheet.create({
   container: {
     flex: 1,
