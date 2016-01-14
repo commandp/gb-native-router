@@ -40,6 +40,7 @@ class Router extends React.Component {
 
   onForward (route, navigator) {
     navigator = navigator || this.navigator
+    if(!navigator) return;
     route.index = this.state.route.index + 1 || 1
     navigator.push(route)
   }
