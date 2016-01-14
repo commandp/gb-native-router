@@ -40,7 +40,7 @@ class Router extends React.Component {
 
   onForward (route, navigator) {
     navigator = navigator || this.navigator
-    if(!navigator) return;
+    if(!navigator) return; // this.navigator only exist after Navigator mount.
     route.index = this.state.route.index + 1 || 1
     navigator.push(route)
   }
