@@ -39,6 +39,7 @@ class Router extends React.Component {
   }
 
   onForward (route, navigator) {
+    navigator = navigator || this.navigator
     route.index = this.state.route.index + 1 || 1
     navigator.push(route)
   }
