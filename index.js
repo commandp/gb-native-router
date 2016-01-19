@@ -214,11 +214,11 @@ class Router extends React.Component {
 Router.propTypes = {
   firstRoute: React.PropTypes.shape({
     name: React.PropTypes.string,
-    component: React.PropTypes.element
+    component: React.PropTypes.func
   }).isRequired,
 
-  rightCorner: React.PropTypes.element,
-  backButtonComponent: React.PropTypes.element,
+  rightCorner: React.PropTypes.func,
+  backButtonComponent: React.PropTypes.func,
 
   customAction: React.PropTypes.func,
 
