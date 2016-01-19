@@ -8,6 +8,7 @@ let {
   Navigator,
   StatusBarIOS,
   View,
+  Text,
   Platform
 } = React
 
@@ -226,7 +227,7 @@ Router.propTypes = {
   noStatusBar: React.PropTypes.bool,
 
   headerStyle: View.propTypes.style,
-  titleStyle: View.propTypes.style,
+  titleStyle: Text.propTypes.style,
   bgStyle: View.propTypes.style,
   borderColor: React.PropTypes.string,
   statusBarColor: React.PropTypes.string,
