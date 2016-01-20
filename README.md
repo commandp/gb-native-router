@@ -93,6 +93,8 @@ The **`<Router \>`** object used to initialize the navigation can take the follo
 - `customAction`: A special callback prop for your action buttons (this can be handy for triggering a side menu for example). The action gets triggered from your custom `leftCorner` or `rightCorner` components by calling `this.props.customAction("someActionName")` from them. It is then picked up like this: `<Router customAction={this.doSomething} />`.
 - `hideNavigationBar`: Hide the navigation bar, always
 - `noStatusBar`: Hide status bar, always, iOS only
+- `expensive`: If all scenes is expensive, render placeholder to avoid stutter
+- `renderPlaceholderView`: Override default placeholder for loading expensive scene
 
 The **`this.props.toRoute()`** callback prop takes one parameter (a JavaScript object) which can have the following keys:
 - `name`: The name of your route, which will be shown as the title of the navigation bar unless it is changed.
@@ -117,6 +119,8 @@ The **`this.props.toRoute()`** callback prop takes one parameter (a JavaScript o
   - Navigator.SceneConfigs.PushFromRight
   - Navigator.SceneConfigs.VerticalDownSwipeJump
   - Navigator.SceneConfigs.VerticalUpSwipeJump
+- `expensive`: If the scene is expensive, render placeholder to avoid stutter
+- `renderPlaceholderView`: Override default placeholder for loading expensive scene
 
 The **`this.props.replaceRoute`**  takes in an object that can contain the same keys as `toRoute()`. The difference is that instead of adding a route to your stack, it replaces the route
 that you're on with the new route that you pass it.
