@@ -2,6 +2,7 @@ import React from 'react-native'
 import { EventEmitter } from 'fbemitter'
 
 import NavBarContainer from './components/NavBarContainer'
+import ExpensiveSceneWrapper from './components/ExpensiveSceneWrapper'
 
 let {
   StyleSheet,
@@ -139,8 +140,13 @@ class Router extends React.Component {
       // Android not support
     }
 
+    let Wrapper = (this.props.expensive || route.expensive) ? ExpensiveSceneWrapper : View
+
     return (
-      <View style={[styles.container, this.props.bgStyle, extraStyling, { marginTop: margin }]}>
+      <Wrapper
+        style={[styles.container, this.props.bgStyle, extraStyling, { marginTop: margin }]}
+        renderPlaceholderView={route.renderPlaceholderView || this.props.renderPlaceholderView}
+      >
         <Content
           name={route.name}
           index={route.index}
@@ -157,7 +163,7 @@ class Router extends React.Component {
           customAction={customAction}
           {...route.passProps}
         />
-      </View>
+      </Wrapper>
     )
   }
 
@@ -228,7 +234,10 @@ Router.propTypes = {
   bgStyle: View.propTypes.style,
   borderColor: React.PropTypes.string,
   statusBarColor: React.PropTypes.string,
-  borderBottomWidth: React.PropTypes.number
+  borderBottomWidth: React.PropTypes.number,
+
+  expensive: React.PropTypes.bool,
+  renderPlaceholderView: React.PropTypes.element
 }
 
 let styles = StyleSheet.create({
