@@ -6,7 +6,8 @@ var NavBarContent = require('./NavBarContent');
 
 var {
   StyleSheet,
-  View
+  View,
+  Platform
 } = React;
 
 var NavBarContainer = React.createClass({
@@ -101,8 +102,10 @@ var NavBarContainer = React.createClass({
       );
     }
 
+    let heightStyle = Platform.OS === 'android' ? styles.heightAndroid : styles.heightIOS
+
     return (
-      <View style={[navbarStyle, this.props.style, trans]}>
+      <View style={[navbarStyle, heightStyle, this.props.style, trans]}>
         {navbarContent}
       </View>
     );
@@ -110,19 +113,23 @@ var NavBarContainer = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  heightIOS: {
+    height: 64
+  },
+  heightAndroid: {
+    height: 51
+  },
   navbarContainer: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    height: 64
   },
   navbarContainerHidden: {
     position: 'absolute',
     top: -64,
     left: 0,
-    right: 0,
-    height: 64
+    right: 0
   }
 });
 

@@ -8,7 +8,8 @@ var {
   Text,
   View,
   Animated,
-  Easing
+  Easing,
+  Platform
 } = React;
 
 var NavBarContent = React.createClass({
@@ -131,8 +132,9 @@ var NavBarContent = React.createClass({
     width = this.props.borderBottomWidth ? this.props.borderBottomWidth : 0;
     color = this.props.borderColor ? this.props.borderColor : null;
 
+    let navbarStyle = Platform.OS === 'android' ? styles.navbarAndroid : styles.navbar
     return (
-      <Animated.View style={[styles.navbar, transitionStyle, this.props.route.headerStyle,{borderBottomWidth: width, borderColor: color}, trans]}>
+      <Animated.View style={[navbarStyle, transitionStyle, this.props.route.headerStyle,{borderBottomWidth: width, borderColor: color}, trans]}>
         {leftCorner}
         {titleComponent}
         {rightCorner}
@@ -143,6 +145,17 @@ var NavBarContent = React.createClass({
 
 
 var styles = StyleSheet.create({
+  navbarAndroid: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 51, // Default Android navbar height
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingTop: 0
+  },
   navbar: {
     position: 'absolute',
     top: 0,
