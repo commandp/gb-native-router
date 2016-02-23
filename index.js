@@ -37,6 +37,9 @@ class Router extends React.Component {
   onBack (navigator) {
     if (this.state.route.index > 0) {
       navigator.pop()
+      return true
+    } else {
+      return false
     }
   }
 
@@ -93,7 +96,7 @@ class Router extends React.Component {
     }.bind(this)
 
     let goBackwards = function () {
-      this.onBack(navigator)
+      return this.onBack(navigator)
     }.bind(this)
 
     let goToFirstRoute = function () {
