@@ -185,7 +185,6 @@ var styles = StyleSheet.create({
   },
   alignLeft: {
     left: 0,
-    backgroundColor: 'pink',
     justifyContent: 'flex-start'
   },
   alignRight: {
