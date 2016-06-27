@@ -135,8 +135,8 @@ var NavBarContent = React.createClass({
     let navbarStyle = Platform.OS === 'android' ? styles.navbarAndroid : styles.navbar
     return (
       <Animated.View style={[navbarStyle, transitionStyle, this.props.route.headerStyle,{borderBottomWidth: width, borderColor: color}, trans]}>
-        {leftCorner}
         {titleComponent}
+        {leftCorner}
         {rightCorner}
       </Animated.View>
     );
@@ -158,14 +158,14 @@ var styles = StyleSheet.create({
   },
   navbar: {
     position: 'absolute',
-    top: 0,
+    top: 13,
     left: 0,
     right: 0,
-    height: 64, // Default iOS navbar height
+    height: 51, // Default iOS navbar height
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingTop: 13
+    paddingTop: 0
   },
   navbarText: {
     color: 'white',
@@ -177,15 +177,20 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   corner: {
-    flex: 1,
-    justifyContent: 'center',
+    position: 'absolute',
+    flexDirection: 'row',
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
   },
-
   alignLeft: {
-    alignItems: 'flex-start'
+    left: 0,
+    backgroundColor: 'pink',
+    justifyContent: 'flex-start'
   },
   alignRight: {
-    alignItems: 'flex-end'
+    right: 0,
+    justifyContent: 'flex-end'
   },
   buttonTextLeft: {
     marginLeft: 10,
